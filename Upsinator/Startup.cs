@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using Upsinator.ViewModels;
+using Upsinator.Views;
+
+namespace Upsinator
+{
+    internal class Startup
+    {
+        [STAThread]
+        static void Main(String[] args)
+        {
+            var app = new App();
+
+            app.InitializeComponent();
+
+            // Have to perform the custom logic before the app.Run() OR our custom view closes itself.
+            // No idea why
+            // TODO: maybe understand why
+            Startup.StartApp(args);
+
+            app.Run();
+        }
+
+        /// <summary>
+        /// The Custom Start-Up logic for our specific application
+        /// </summary>
+        /// <param name="args"></param>
+        static void StartApp(String[] args)
+        {
+            var upsinator = new UpsiView();
+            var context = (UpsiViewModel)upsinator.DataContext;
+
+            var filePath = @"C:\prog\wpf\test\01\Upsinator\test\upsi-scripts\merge-csv.upsi";
+
+            if (args.Length > 0)
+            {
+                filePath = args[0];
+            }
+
+            context.SetFilePath(filePath);
+
+            upsinator.Show();
+        }
+    }
+}

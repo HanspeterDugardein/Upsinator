@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <StartupObject>Upsinator.Startup</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\settings-icon-2.png" />
+    <None Remove="Resources\settings-icon-3.png" />
+    <None Remove="Resources\settings-icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\settings-icon-2.png" />
+    <Resource Include="Resources\settings-icon-3.png" />
+    <Resource Include="Resources\settings-icon.png" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,70 @@
+﻿using System;
+using System.IO;
+using System.Text.Json;
+using System.Windows.Input;
+using Upsinator.Logic;
+using Upsinator.Models;
+
+namespace Upsinator.ViewModels
+{
+    internal class UpsinatorViewModel
+    {
+        public UpsinatorModel Model { get; set; }
+
+        public ICommand ExecuteCmd { get; set; }
+
+        public UpsinatorViewModel()
+        {
+            this.Model = new UpsinatorModel();
+
+            this.ExecuteCmd = new RelayCommand(new Action<object>(this.Execute));
+        }
+
+        public void SetPath(string filePath)
+        {
+            this.Model.FilePathUpsi = filePath;
+
+            this.InitModel();
+        }
+
+        private void InitModel()
+        {
+            if (this.ValidateUpsiFile())
+            {
+                using (var sr = new StreamReader(this.Model.FilePathUpsi))
+                {
+                    var text = sr.ReadToEnd();
+
+                    if (!String.IsNullOrEmpty(text))
+                    {
+                        var obj = JsonSerializer.Deserialize<UpsiDataModel>(text);
+
+                        if (obj != null)
+                        {
+                            this.Model.Upsi = obj;
+                        }
+                    }
+                }
+            }
+        }
+
+        private bool ValidateUpsiFile()
+        {
+            if (!File.Exists(this.Model.FilePathUpsi))
+            {
+                throw new Exception($"The file '{this.Model.FilePathUpsi}' was not found");
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Execute the PowerShell command here
+        /// </summary>
+        /// <param name="param"></param>
+        private void Execute(object param)
+        {
+
+        }
+    }
+}

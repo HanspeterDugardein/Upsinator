@@ -1,0 +1,16 @@
+{
+	"Title": "Merge CSV files",
+	"PowerShellScript": "G:\\Prog\\Upsinator\\Upsinator\\Upsinator\\Upsinator\\test\\ps-scripts\\Merge-Csv.ps1",
+	"Args": [
+		{
+			"Label": "Input folder",
+			"Value": "",
+			"Type": "Folder"
+		},
+		{
+			"Label": "Output file",
+			"Value": "",
+			"Type": "File"
+		}
+	]
+}

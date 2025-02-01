@@ -1,0 +1,29 @@
+﻿<Window x:Class="Upsinator.Views.UpsiView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:Upsinator.ViewModels"
+        xmlns:local="clr-namespace:Upsinator.Views"
+        mc:Ignorable="d"
+        Title="UpsiView" Height="600" Width="800"
+        MinHeight="450" MinWidth="400">
+
+    <Window.DataContext>
+        <viewModels:UpsiViewModel />
+    </Window.DataContext>
+
+    <Grid>
+        <TabControl Grid.Row="0">
+            <TabItem Header="Main">
+                <local:UpsiUseView DataContext="{Binding UseViewModel}" />
+            </TabItem>
+
+            <TabItem Header="Settings">
+                <local:UpsiSettingsView DataContext="{Binding SettingsViewModel}" />
+            </TabItem>
+        </TabControl>
+
+        <!--<Image Source="/Resources/settings_wrench_01.png" Width="16" Height="16" />-->
+    </Grid>
+</Window>

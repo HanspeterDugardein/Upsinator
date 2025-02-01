@@ -1,0 +1,41 @@
+﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace Upsinator.Models
+{
+    internal class UpsinatorModel : INotifyPropertyChanged
+    {
+        private UpsiDataModel _model;
+
+        public string FilePathUpsi { get; set; }
+
+        public UpsiDataModel Upsi
+        {
+            get
+            {
+                return this._model;
+            }
+            set
+            {
+                this._model = value;
+
+                this.NotifyPropertyChanged(nameof(this.Upsi));
+            }
+        }
+
+        public UpsinatorModel()
+        {
+            this.FilePathUpsi = "Uninitialized_filepath";
+
+            this._model = new UpsiDataModel();
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+}

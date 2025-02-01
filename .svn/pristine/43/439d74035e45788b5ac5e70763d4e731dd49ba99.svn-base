@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Upsinator.Logic
+{
+    internal class HPowerSheller
+    {
+        public string Cmd { get; private set; }
+
+        public HPowerSheller(string cmd)
+        {
+            this.Cmd = cmd;
+        }
+
+        public void Run()
+        {
+
+        }
+    }
+}

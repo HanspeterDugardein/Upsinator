@@ -1,0 +1,49 @@
+﻿using System.Collections.Generic;
+using System.Windows.Documents;
+using Upsinator.Models;
+
+namespace Upsinator.ViewModels
+{
+    internal class UpsiSettingsViewModel
+    {
+        public UpsiSettingsModel Model { get; set; }
+
+        public UpsiSettingsViewModel()
+        {
+            this.Model = new UpsiSettingsModel();
+        }
+
+        public void SetFilePathScript(string filePathScript)
+        {
+            this.Model.FilePathUpsi = filePathScript;
+        }
+
+        /// <summary>
+        /// Sets the Data Model of the UPSI file for the SettingsView
+        /// </summary>
+        /// <param name="dataModel">DataModel to get the UPSI file data from</param>
+        public void SetDataModel(UpsiDataModel dataModel)
+        {
+            // Create actual new variables of the dataModel for editing;
+            //  because of 'complex' objects, it is saved by reference instead of
+            //  by value, so new copy!
+            var newDataModel = new UpsiDataModel();
+
+            newDataModel.PowerShellScript = dataModel.PowerShellScript;
+            
+            var newArgs = new List<UpsiDataArgModel>();
+
+            foreach (var arg in dataModel.Args)
+            {
+                newArgs.Add(new UpsiDataArgModel()
+                {
+                    Label = arg.Label,
+                    Value = arg.Value,
+                    Id = arg.Id
+                });
+            }
+
+            this.Model.Upsi.Args = newArgs;
+        }
+    }
+}

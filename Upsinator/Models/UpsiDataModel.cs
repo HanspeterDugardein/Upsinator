@@ -1,0 +1,79 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace Upsinator.Models
+{
+    internal class UpsiDataModel : INotifyPropertyChanged
+    {
+        private string _title;
+
+        private string _powerShellScript;
+
+        private ObservableCollection<UpsiDataArgModel> _args;
+
+        public UpsiDataModel()
+        {
+            this._title = "Uninitialized_title";
+
+            this._powerShellScript = "Uninitialized_powershell_script";
+
+            this._args = new ObservableCollection<UpsiDataArgModel>();
+        }
+
+        public string Title
+        {
+            get
+            {
+                return this._title;
+            }
+            set
+            {
+                this._title = value;
+
+                this.NotifyPropertyChanged(nameof(this.Title));
+            }
+        }
+
+        public string PowerShellScript
+        {
+            get
+            {
+                return this._powerShellScript;
+            }
+            set
+            {
+                this._powerShellScript = value;
+
+                this.NotifyPropertyChanged(nameof(this.PowerShellScript));
+            }
+        }
+
+        public ObservableCollection<UpsiDataArgModel> Args
+        {
+            get
+            {
+                return this._args;
+            }
+            set
+            {
+               this._args = value;
+
+                this.NotifyPropertyChanged(nameof(this.Args));
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+}
