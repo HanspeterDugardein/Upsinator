@@ -60,6 +60,24 @@
                                 <TextBox Text="{Binding Value}" />
                             </StackPanel>
 
+                            <!-- ArgTypeEnum.Folder -->
+                            <StackPanel Grid.Column="1">
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger  
+                                                Binding="{Binding ArgType}"
+                                                Value="{x:Static models:ArgTypeEnum.Folder}">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+
+                                <customControls:FolderPathPicker Path="{Binding Value}" />
+                            </StackPanel>
+                            
                             <!-- ArgTypeEnum.File -->
                             <StackPanel Grid.Column="1">
                                 <StackPanel.Style>
@@ -80,22 +98,24 @@
                                 <customControls:FilePathPicker Path="{Binding Value}" />
                             </StackPanel>
 
-                            <!-- ArgTypeEnum.Folder -->
+                            <!-- ArgTypeEnum.Date -->
                             <StackPanel Grid.Column="1">
                                 <StackPanel.Style>
                                     <Style TargetType="StackPanel">
-                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Setter 
+                                                Property="Visibility" 
+                                                Value="Collapsed" />
                                         <Style.Triggers>
-                                            <DataTrigger  
-                                                Binding="{Binding ArgType}"
-                                                Value="{x:Static models:ArgTypeEnum.Folder}">
+                                            <DataTrigger 
+                                                    Binding="{Binding ArgType}"
+                                                    Value="{x:Static models:ArgTypeEnum.Date}">
                                                 <Setter Property="Visibility" Value="Visible" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </StackPanel.Style>
 
-                                <customControls:FolderPathPicker Path="{Binding Value}" />
+                                <customControls:DateTimeStringPicker Value="{Binding ValueDateTime}" />
                             </StackPanel>
                         </Grid>
                     </DataTemplate>

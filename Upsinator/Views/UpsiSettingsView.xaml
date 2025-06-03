@@ -80,7 +80,7 @@
                                         <RowDefinition Height="30" />
                                         <RowDefinition Height="30" />
                                         <RowDefinition Height="30" />
-                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="32" />
                                         <!-- 2px more for the combobox to avoid clipping -->
                                         <RowDefinition Height="32" />
                                         <RowDefinition Height="30" />
@@ -94,17 +94,97 @@
 
                                     <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding DisplayTitle}" FontWeight="Bold" Margin="5" />
                                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Label" Margin="5" />
-                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Default value" Margin="5" />
-                                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Is mandatory" Margin="5" />
-                                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Value type" Margin="5" />
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Value type" Margin="5" />
+                                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Default value" Margin="5" />
+                                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Is mandatory" Margin="5" />
 
                                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Label}" Margin="5" />
-                                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Value}" Margin="5" />
-                                    <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding IsMandatory}" Margin="5" />
                                     <ComboBox 
-                                        Grid.Row="4" Grid.Column="1" Margin="5" 
+                                        Grid.Row="2" Grid.Column="1" Margin="5" 
                                         ItemsSource="{Binding Source={StaticResource enumDataType}}"
-                                        SelectedItem="{Binding Path=ArgType}" />
+                                        SelectedItem="{Binding Path=ArgType}"
+                                        SelectionChanged="ComboBox_SelectionChanged"/>
+                                    <StackPanel Grid.Row="3" Grid.Column="1" Margin="5">
+                                        <!-- ArgTypeEnum.String -->
+                                        <StackPanel Grid.Column="1">
+                                            <StackPanel.Style>
+                                                <Style TargetType="StackPanel">
+                                                    <Setter 
+                                                Property="Visibility" 
+                                                Value="Collapsed" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger
+                                                            Binding="{Binding ArgType}"
+                                                            Value="{x:Static models:ArgTypeEnum.String}">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </StackPanel.Style>
+
+                                            <TextBox Text="{Binding Value}" />
+                                        </StackPanel>
+
+                                        <!-- ArgTypeEnum.Folder -->
+                                        <StackPanel Grid.Column="1">
+                                            <StackPanel.Style>
+                                                <Style TargetType="StackPanel">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger  
+                                                            Binding="{Binding ArgType}"
+                                                            Value="{x:Static models:ArgTypeEnum.Folder}">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </StackPanel.Style>
+
+                                            <customControls:FolderPathPicker Path="{Binding Value}" />
+                                        </StackPanel>
+
+                                        <!-- ArgTypeEnum.File -->
+                                        <StackPanel Grid.Column="1">
+                                            <StackPanel.Style>
+                                                <Style TargetType="StackPanel">
+                                                    <Setter 
+                                                Property="Visibility" 
+                                                Value="Collapsed" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger 
+                                                            Binding="{Binding ArgType}"
+                                                            Value="{x:Static models:ArgTypeEnum.File}">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </StackPanel.Style>
+
+                                            <customControls:FilePathPicker Path="{Binding Value}" />
+                                        </StackPanel>
+
+                                        <!-- ArgTypeEnum.Date -->
+                                        <StackPanel Grid.Column="1">
+                                            <StackPanel.Style>
+                                                <Style TargetType="StackPanel">
+                                                    <Setter 
+                                                Property="Visibility" 
+                                                Value="Collapsed" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger 
+                                                            Binding="{Binding ArgType}"
+                                                            Value="{x:Static models:ArgTypeEnum.Date}">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </StackPanel.Style>
+
+                                            <customControls:DateTimeStringPicker Value="{Binding ValueDateTime}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <!--<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Value}" Margin="5" />-->
+                                    <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding IsMandatory}" Margin="5" />
 
                                     <Button
                                         Grid.Row="5"

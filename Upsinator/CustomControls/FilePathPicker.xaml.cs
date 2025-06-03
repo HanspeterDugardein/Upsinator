@@ -90,7 +90,7 @@ namespace Upsinator.CustomControls
 
             if (!String.IsNullOrEmpty(selectedFile))
             {
-                if (!File.Exists(selectedFile))
+                if (File.Exists(selectedFile))
                 {
                     this.Path = selectedFile;
                 }
@@ -107,11 +107,7 @@ namespace Upsinator.CustomControls
         {
             get
             {
-                // Hack: Doing this always ensures a folder,
-                // either directly selected folder, or the folder of the somehow selected file
-                // Little code-smell as this seems to allow files to for a FOLDER-selector tool but whatevers
-                //return Path.GetDirectoryName(this.FolderPath);
-                return System.IO.Path.GetDirectoryName(this.Path);
+                return System.IO.Path.GetDirectoryName(this.Path) ?? string.Empty;
             }
         }
 

@@ -116,6 +116,19 @@ namespace Upsinator.Models
             }
         }
 
+        [JsonIgnore]
+        public DateTime ValueDateTime
+        {
+            get
+            {
+                return DateTime.Now;
+            }
+            set
+            {
+                this.Value = value.ToString();
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
@@ -152,6 +165,8 @@ namespace Upsinator.Models
     {
         String,
         Folder,
-        File
+        File,
+        Date,
+        Boolean
     }
 }

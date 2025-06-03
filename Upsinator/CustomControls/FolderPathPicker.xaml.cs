@@ -93,9 +93,6 @@ namespace Upsinator.CustomControls
         {
             get
             {
-                // Hack: Doing this always ensures a folder,
-                // either directly selected folder, or the folder of the somehow selected file
-                // Little code-smell as this mis-uses selecting files but does not matter.
                 return System.IO.Path.GetDirectoryName(this.Path) ?? string.Empty;
             }
         }

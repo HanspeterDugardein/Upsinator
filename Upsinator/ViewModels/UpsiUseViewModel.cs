@@ -26,7 +26,7 @@ namespace Upsinator.ViewModels
         /// <param name="param"></param>
         private void Execute(object _param)
         {
-
+            Console.WriteLine(this.Model.Upsi.Args[2].Value);
         }
     }
 }
